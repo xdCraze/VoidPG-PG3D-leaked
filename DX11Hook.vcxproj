@@ -1,0 +1,457 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup Label="ProjectConfigurations">
+    <ProjectConfiguration Include="Debug|Win32">
+      <Configuration>Debug</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|Win32">
+      <Configuration>Release</Configuration>
+      <Platform>Win32</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Debug|x64">
+      <Configuration>Debug</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+    <ProjectConfiguration Include="Release|x64">
+      <Configuration>Release</Configuration>
+      <Platform>x64</Platform>
+    </ProjectConfiguration>
+  </ItemGroup>
+  <PropertyGroup Label="Globals">
+    <VCProjectVersion>16.0</VCProjectVersion>
+    <Keyword>Win32Proj</Keyword>
+    <ProjectGuid>{bbbd86b9-6853-4cb3-9041-3a8972bf89d2}</ProjectGuid>
+    <RootNamespace>DX11Hook</RootNamespace>
+    <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>true</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'" Label="Configuration">
+    <ConfigurationType>DynamicLibrary</ConfigurationType>
+    <UseDebugLibraries>false</UseDebugLibraries>
+    <PlatformToolset>v145</PlatformToolset>
+    <WholeProgramOptimization>true</WholeProgramOptimization>
+    <CharacterSet>Unicode</CharacterSet>
+  </PropertyGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.props" />
+  <ImportGroup Label="ExtensionSettings">
+  </ImportGroup>
+  <ImportGroup Label="Shared">
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <ImportGroup Label="PropertySheets" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>$(SolutionDir)MinHook;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <LinkIncremental>false</LinkIncremental>
+    <LibraryPath>$(SolutionDir)MinHook;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <LinkIncremental>true</LinkIncremental>
+    <LibraryPath>$(SolutionDir)MinHook;$(LibraryPath)</LibraryPath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <LinkIncremental>false</LinkIncremental>
+    <LibraryPath>$(ProjectDir)\Utils\openssl\libopenssl-x64-release\lib;$(LibraryPath)</LibraryPath>
+    <OutDir>$(SolutionDir)\Build\$(Platform)</OutDir>
+    <IntDir>$(SolutionDir)\Intermediate\$(Platform)</IntDir>
+    <IncludePath>$(ProjectDir)\Utils;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg">
+    <VcpkgEnabled>true</VcpkgEnabled>
+  </PropertyGroup>
+  <PropertyGroup Label="Vcpkg" Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <VcpkgUseStatic>true</VcpkgUseStatic>
+  </PropertyGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>WIN32;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <ClCompile>
+      <WarningLevel>Level3</WarningLevel>
+      <FunctionLevelLinking>true</FunctionLevelLinking>
+      <IntrinsicFunctions>true</IntrinsicFunctions>
+      <SDLCheck>true</SDLCheck>
+      <PreprocessorDefinitions>OPENSSL_NO_DEPRECATED;OPENSSL_USE_STATIC_LIBS;_CRT_SECURE_NO_WARNINGS;CURL_STATICLIB;NDEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <ConformanceMode>true</ConformanceMode>
+      <LanguageStandard>stdcpp20</LanguageStandard>
+      <AdditionalIncludeDirectories>$(ProjectDir)\Utils\curl\include;$(ProjectDir)\Utils\openssl\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+    </ClCompile>
+    <Link>
+      <SubSystem>Console</SubSystem>
+      <EnableCOMDATFolding>true</EnableCOMDATFolding>
+      <OptimizeReferences>true</OptimizeReferences>
+      <GenerateDebugInformation>true</GenerateDebugInformation>
+      <IgnoreSpecificDefaultLibraries>/NODEFAULTLIB:LIBCMT</IgnoreSpecificDefaultLibraries>
+      <AdditionalDependencies>Normaliz.lib;ws2_32.lib;wldap32.lib;crypt32.lib;advapi32.lib;iphlpapi.lib;%(AdditionalDependencies)</AdditionalDependencies>
+    </Link>
+  </ItemDefinitionGroup>
+  <ItemGroup>
+    <ClCompile Include="Utils\Backend\Backend.cpp" />
+    <ClCompile Include="Utils\Headers\BNM-IL2CPP\Logger.cpp" />
+    <ClCompile Include="Utils\Headers\Menu\Snowflake\Snowflake.cpp" />
+    <ClCompile Include="Utils\ImGui\backends\imgui_impl_dx11.cpp" />
+    <ClCompile Include="Utils\ImGui\backends\imgui_impl_win32.cpp" />
+    <ClCompile Include="Utils\ImGui\imgui.cpp" />
+    <ClCompile Include="Utils\ImGui\imgui_demo.cpp" />
+    <ClCompile Include="Utils\ImGui\imgui_draw.cpp" />
+    <ClCompile Include="Utils\ImGui\imgui_impl_dx11.cpp" />
+    <ClCompile Include="Utils\ImGui\imgui_impl_win32.cpp" />
+    <ClCompile Include="Utils\ImGui\imgui_tables.cpp" />
+    <ClCompile Include="Utils\ImGui\imgui_widgets.cpp" />
+    <ClCompile Include="dllmain.cpp" />
+    <ClCompile Include="Utils\ImGui\libs\usynergy\uSynergy.c" />
+    <ClCompile Include="Utils\ImGui\misc\cpp\imgui_stdlib.cpp" />
+    <ClCompile Include="Utils\ImGui\misc\fonts\binary_to_compressed_c.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Utils\Backend\Backend.h" />
+    <ClInclude Include="Utils\Backend\classFinder.h" />
+    <ClInclude Include="Utils\Backend\functions.h" />
+    <ClInclude Include="Utils\Backend\Misc.h" />
+    <ClInclude Include="Utils\Backend\patterns.h" />
+    <ClInclude Include="Utils\Backend\pointerFuncs.h" />
+    <ClInclude Include="Utils\Backend\UtilityFunctions.h" />
+    <ClInclude Include="Utils\Backend\WSFuncs.h" />
+    <ClInclude Include="Utils\Backend\WSFunctions.h" />
+    <ClInclude Include="Utils\curl\include\curl\curl.h" />
+    <ClInclude Include="Utils\curl\include\curl\curlver.h" />
+    <ClInclude Include="Utils\curl\include\curl\easy.h" />
+    <ClInclude Include="Utils\curl\include\curl\header.h" />
+    <ClInclude Include="Utils\curl\include\curl\mprintf.h" />
+    <ClInclude Include="Utils\curl\include\curl\multi.h" />
+    <ClInclude Include="Utils\curl\include\curl\options.h" />
+    <ClInclude Include="Utils\curl\include\curl\stdcheaders.h" />
+    <ClInclude Include="Utils\curl\include\curl\system.h" />
+    <ClInclude Include="Utils\curl\include\curl\typecheck-gcc.h" />
+    <ClInclude Include="Utils\curl\include\curl\urlapi.h" />
+    <ClInclude Include="Utils\curl\include\curl\websockets.h" />
+    <ClInclude Include="Utils\Headers\Auth.h" />
+    <ClInclude Include="Utils\Headers\BNM-IL2CPP\BNM.hpp" />
+    <ClInclude Include="Utils\Headers\BNM-IL2CPP\Defines.hpp" />
+    <ClInclude Include="Utils\Headers\BNM-IL2CPP\ExportCall.hpp" />
+    <ClInclude Include="Utils\Headers\BNM-IL2CPP\Exports.hpp" />
+    <ClInclude Include="Utils\Headers\BNM-IL2CPP\Logger.h" />
+    <ClInclude Include="Utils\Headers\BNM-IL2CPP\Offsets.hpp" />
+    <ClInclude Include="Utils\Headers\BNM-IL2CPP\Structures\IL2CPP\Array.hpp" />
+    <ClInclude Include="Utils\Headers\BNM-IL2CPP\Structures\IL2CPP\Assembly.hpp" />
+    <ClInclude Include="Utils\Headers\BNM-IL2CPP\Structures\IL2CPP\Class.hpp" />
+    <ClInclude Include="Utils\Headers\BNM-IL2CPP\Structures\IL2CPP\Domain.hpp" />
+    <ClInclude Include="Utils\Headers\BNM-IL2CPP\Structures\IL2CPP\Field.hpp" />
+    <ClInclude Include="Utils\Headers\BNM-IL2CPP\Structures\IL2CPP\Image.hpp" />
+    <ClInclude Include="Utils\Headers\BNM-IL2CPP\Structures\IL2CPP\Method.hpp" />
+    <ClInclude Include="Utils\Headers\BNM-IL2CPP\Structures\IL2CPP\String.hpp" />
+    <ClInclude Include="Utils\Headers\BNM-IL2CPP\Structures\Offsets.hpp" />
+    <ClInclude Include="Utils\Headers\Filehandling.h" />
+    <ClInclude Include="Utils\Headers\FNPointer.h" />
+    <ClInclude Include="Utils\Headers\fslog.h" />
+    <ClInclude Include="Utils\Headers\httpSx.h" />
+    <ClInclude Include="Utils\Headers\il2cpp\il2cpp-api-functions.h" />
+    <ClInclude Include="Utils\Headers\il2cpp\il2cpp-tabledefs.h" />
+    <ClInclude Include="Utils\Headers\il2cpp\il2cpp-types.h" />
+    <ClInclude Include="Utils\Headers\il2cpp\il2cpp-utils.h" />
+    <ClInclude Include="Utils\Headers\lists.h" />
+    <ClInclude Include="Utils\Headers\Menu\Fonts\Byte.h" />
+    <ClInclude Include="Utils\Headers\Menu\Fonts\fa-regular-400.h" />
+    <ClInclude Include="Utils\Headers\Menu\Fonts\fa-solid-900.h" />
+    <ClInclude Include="Utils\Headers\Menu\Fonts\FontAwesome.h" />
+    <ClInclude Include="Utils\Headers\Menu\Fonts\IconsFontAwesome6.h" />
+    <ClInclude Include="Utils\Headers\Menu\ImGuiNotify.hpp" />
+    <ClInclude Include="Utils\Headers\Menu\MenuDefs.h" />
+    <ClInclude Include="Utils\Headers\Menu\MenuSetup.h" />
+    <ClInclude Include="Utils\Headers\Menu\SxitxmaImGui.h" />
+    <ClInclude Include="Utils\Headers\nlohmann\json.h" />
+    <ClInclude Include="Utils\Headers\obfusheader.h" />
+    <ClInclude Include="Utils\Headers\Unity\API\Camera.hpp" />
+    <ClInclude Include="Utils\Headers\Unity\API\Component.hpp" />
+    <ClInclude Include="Utils\Headers\Unity\API\GameObject.hpp" />
+    <ClInclude Include="Utils\Headers\Unity\API\LayerMask.hpp" />
+    <ClInclude Include="Utils\Headers\Unity\API\Object.hpp" />
+    <ClInclude Include="Utils\Headers\Unity\API\Rigidbody.hpp" />
+    <ClInclude Include="Utils\Headers\Unity\API\Transform.hpp" />
+    <ClInclude Include="Utils\Headers\Unity\Defines.hpp" />
+    <ClInclude Include="Utils\Headers\Unity\Obfuscators.hpp" />
+    <ClInclude Include="Utils\Headers\Unity\Structures\Engine.hpp" />
+    <ClInclude Include="Utils\Headers\Unity\Structures\il2cpp.hpp" />
+    <ClInclude Include="Utils\Headers\Unity\Structures\il2cppArray.hpp" />
+    <ClInclude Include="Utils\Headers\Unity\Structures\il2cppDictionary.hpp" />
+    <ClInclude Include="Utils\Headers\Unity\Structures\System_String.hpp" />
+    <ClInclude Include="Utils\Headers\Utils.h" />
+    <ClInclude Include="Utils\Headers\vars.h" />
+    <ClInclude Include="Utils\il2cpp\il2cpp-api-functions.h" />
+    <ClInclude Include="Utils\il2cpp\il2cpp-tabledefs.h" />
+    <ClInclude Include="Utils\il2cpp\il2cpp-types.h" />
+    <ClInclude Include="Utils\il2cpp\il2cpp-utils.h" />
+    <ClInclude Include="Utils\IL2CPP_Resolver\API\Callback.hpp" />
+    <ClInclude Include="Utils\IL2CPP_Resolver\API\Class.hpp" />
+    <ClInclude Include="Utils\IL2CPP_Resolver\API\Domain.hpp" />
+    <ClInclude Include="Utils\IL2CPP_Resolver\API\ResolveCall.hpp" />
+    <ClInclude Include="Utils\IL2CPP_Resolver\API\String.hpp" />
+    <ClInclude Include="Utils\IL2CPP_Resolver\API\Thread.hpp" />
+    <ClInclude Include="Utils\IL2CPP_Resolver\Data.hpp" />
+    <ClInclude Include="Utils\IL2CPP_Resolver\Defines.hpp" />
+    <ClInclude Include="Utils\IL2CPP_Resolver\IL2CPP_Resolver.hpp" />
+    <ClInclude Include="Utils\IL2CPP_Resolver\SystemTypeCache.hpp" />
+    <ClInclude Include="Utils\IL2CPP_Resolver\Utils\Hash.hpp" />
+    <ClInclude Include="Utils\IL2CPP_Resolver\Utils\Helper.hpp" />
+    <ClInclude Include="Utils\IL2CPP_Resolver\Utils\VTable.hpp" />
+    <ClInclude Include="Utils\ImGui\backends\imgui_impl_dx11.h" />
+    <ClInclude Include="Utils\ImGui\backends\imgui_impl_win32.h" />
+    <ClInclude Include="Utils\ImGui\imconfig.h" />
+    <ClInclude Include="Utils\ImGui\imgui.h" />
+    <ClInclude Include="Utils\ImGui\imgui_impl_dx11.h" />
+    <ClInclude Include="Utils\ImGui\imgui_impl_win32.h" />
+    <ClInclude Include="Utils\ImGui\imgui_internal.h" />
+    <ClInclude Include="Utils\ImGui\imstb_rectpack.h" />
+    <ClInclude Include="Utils\ImGui\imstb_textedit.h" />
+    <ClInclude Include="Utils\ImGui\imstb_truetype.h" />
+    <ClInclude Include="Utils\ImGui\libs\emscripten\emscripten_mainloop_stub.h" />
+    <ClInclude Include="Utils\ImGui\libs\glfw\include\GLFW\glfw3.h" />
+    <ClInclude Include="Utils\ImGui\libs\glfw\include\GLFW\glfw3native.h" />
+    <ClInclude Include="Utils\ImGui\libs\usynergy\uSynergy.h" />
+    <ClInclude Include="Utils\ImGui\misc\cpp\imgui_stdlib.h" />
+    <ClInclude Include="Utils\ImGui\misc\fonts\fa-solid-900.h" />
+    <ClInclude Include="Utils\ImGui\misc\fonts\IconsFontAwesome6.h" />
+    <ClInclude Include="Utils\ImGui\misc\fonts\museosans.hpp" />
+    <ClInclude Include="Utils\ImGui\misc\single_file\imgui_single_file.h" />
+    <ClInclude Include="Utils\obfusheader.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\aes.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\asn1.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\asn1err.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\asn1t.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\asn1_mac.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\async.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\asyncerr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\bio.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\bioerr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\blowfish.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\bn.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\bnerr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\buffer.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\buffererr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\camellia.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\cast.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\cmac.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\cmp.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\cmperr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\cmp_util.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\cms.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\cmserr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\comp.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\comperr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\conf.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\conferr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\configuration.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\conftypes.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\conf_api.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\core.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\core_dispatch.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\core_names.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\core_object.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\crmf.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\crmferr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\crypto.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\cryptoerr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\cryptoerr_legacy.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\ct.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\cterr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\decoder.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\decodererr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\des.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\dh.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\dherr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\dsa.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\dsaerr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\dtls1.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\ebcdic.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\ec.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\ecdh.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\ecdsa.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\ecerr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\encoder.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\encodererr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\engine.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\engineerr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\err.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\ess.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\esserr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\evp.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\evperr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\e_os2.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\e_ostime.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\fipskey.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\fips_names.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\hmac.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\hpke.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\http.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\httperr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\idea.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\kdf.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\kdferr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\lhash.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\macros.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\md2.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\md4.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\md5.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\mdc2.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\modes.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\objects.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\objectserr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\obj_mac.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\ocsp.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\ocsperr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\opensslconf.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\opensslv.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\ossl_typ.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\params.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\param_build.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\pem.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\pem2.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\pemerr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\pkcs12.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\pkcs12err.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\pkcs7.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\pkcs7err.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\proverr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\provider.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\prov_ssl.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\quic.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\rand.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\randerr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\rc2.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\rc4.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\rc5.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\ripemd.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\rsa.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\rsaerr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\safestack.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\seed.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\self_test.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\sha.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\srp.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\srtp.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\ssl.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\ssl2.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\ssl3.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\sslerr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\sslerr_legacy.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\stack.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\store.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\storeerr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\symhacks.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\thread.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\tls1.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\trace.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\ts.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\tserr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\txt_db.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\types.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\ui.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\uierr.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\whrlpool.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\x509.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\x509err.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\x509v3.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\x509v3err.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\x509_vfy.h" />
+    <ClInclude Include="Utils\openssl\include\openssl\__DECC_INCLUDE_EPILOGUE.H" />
+    <ClInclude Include="Utils\openssl\include\openssl\__DECC_INCLUDE_PROLOGUE.H" />
+    <ClInclude Include="Utils\Unity\API\Camera.hpp" />
+    <ClInclude Include="Utils\Unity\API\Component.hpp" />
+    <ClInclude Include="Utils\Unity\API\GameObject.hpp" />
+    <ClInclude Include="Utils\Unity\API\LayerMask.hpp" />
+    <ClInclude Include="Utils\Unity\API\Object.hpp" />
+    <ClInclude Include="Utils\Unity\API\Rigidbody.hpp" />
+    <ClInclude Include="Utils\Unity\API\Transform.hpp" />
+    <ClInclude Include="Utils\Unity\Defines.hpp" />
+    <ClInclude Include="Utils\Unity\Obfuscators.hpp" />
+    <ClInclude Include="Utils\Unity\Structures\Engine.hpp" />
+    <ClInclude Include="Utils\Unity\Structures\il2cpp.hpp" />
+    <ClInclude Include="Utils\Unity\Structures\il2cppArray.hpp" />
+    <ClInclude Include="Utils\Unity\Structures\il2cppDictionary.hpp" />
+    <ClInclude Include="Utils\Unity\Structures\System_String.hpp" />
+    <ClInclude Include="Utils\Utils.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <Library Include="Utils\curl\include\curl\libcurl_a.lib" />
+    <Library Include="Utils\curl\libcurl-x64-release\lib\libcurl_a.lib" />
+    <Library Include="Utils\ImGui\libs\glfw\lib-vc2010-32\glfw3.lib" />
+    <Library Include="Utils\ImGui\libs\glfw\lib-vc2010-64\glfw3.lib" />
+    <Library Include="Utils\openssl\include\openssl\libcrypto.lib" />
+    <Library Include="Utils\openssl\include\openssl\libssl.lib" />
+    <Library Include="Utils\openssl\libopenssl-x64-release\lib\libcrypto.lib" />
+    <Library Include="Utils\openssl\libopenssl-x64-release\lib\libssl.lib" />
+  </ItemGroup>
+  <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
+  <ImportGroup Label="ExtensionTargets">
+  </ImportGroup>
+</Project>
