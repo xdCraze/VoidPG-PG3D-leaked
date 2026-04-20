@@ -4,7 +4,7 @@ Leaked source of the ratted menu VoidPG for Pixel Gun 3D made by the one and onl
 ## Screenshots of Source Code
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/xdCraze/VoidPG-PG3D-leaked/Pictures/1.png" width="700">
+  <img src="https://raw.githubusercontent.com/xdCraze/VoidPG-PG3D-leaked/main/Pictures/1.png" width="700">
 </p>
 
 <p align="center">
@@ -12,7 +12,7 @@ Leaked source of the ratted menu VoidPG for Pixel Gun 3D made by the one and onl
 </p>
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/xdCraze/VoidPG-PG3D-leaked/Pictures/3.png" width="700">
+  <img src="https://raw.githubusercontent.com/xdCraze/VoidPG-PG3D-leaked/main/Pictures/3.png" width="700">
 </p>
 
 ## Prerequisites
